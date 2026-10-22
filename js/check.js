@@ -116,26 +116,67 @@
         ok('flow', fl.done === c.done, `${c.rows.join('/')}: done ${fl.done}, expected ${c.done}`);
         ok('flow', Array.from(fl.wet).join('') === c.wet.join(''), `${c.rows.join('/')}: wet ${Array.from(fl.wet).join('')}, expected ${c.wet.join('')}`);
       }
-      // random gardens against a union-find of the pipes that face each other
+      // random gardens against a union-find of the pipes that face each other. Odd ones are a random tree of pipes
+      // with flowers on its leaves and a few pipes turned (so about half have every flower watered); even ones are
+      // any pipes at all.
       const n = quick ? 600 : 4000;
       let agreed = 0, dones = 0;
       for (let t = 0; t < n; t++) {
         const w = 2 + ri(6), h = 2 + ri(6), cells = w * h;
         const kinds = [], masks = [];
-        for (let i = 0; i < cells; i++) {
-          const r = rnd();
-          kinds.push(r < 0.15 ? '.' : 'P');
-          masks.push(r < 0.15 ? 0 : 1 + ri(15));
-        }
-        const src = ri(cells);
-        kinds[src] = 'S';
         const fl = [];
-        for (let k = 0; k < 1 + ri(3); k++) {
-          const f = ri(cells);
-          if (f !== src && kinds[f] !== 'F') {
-            kinds[f] = 'F';
-            masks[f] = [1, 2, 4, 8][ri(4)];
-            fl.push(f);
+        let src;
+        if (t % 2) {
+          // a random spanning tree (depth first), its edges as the pipes
+          const seen = new Uint8Array(cells), stack = [ri(cells)];
+          for (let i = 0; i < cells; i++) masks.push(0);
+          seen[stack[0]] = 1;
+          while (stack.length) {
+            const i = stack[stack.length - 1];
+            const opts = [0, 1, 2, 3].filter((d) => {
+              const j = PC.nb({ w, h }, i, d);
+              return j >= 0 && !seen[j];
+            });
+            if (!opts.length) {
+              stack.pop();
+              continue;
+            }
+            const d = opts[ri(opts.length)], j = PC.nb({ w, h }, i, d);
+            masks[i] |= PC.BIT[d];
+            masks[j] |= PC.DIRS[d][3];
+            seen[j] = 1;
+            stack.push(j);
+          }
+          const leaves = [];
+          for (let i = 0; i < cells; i++) {
+            kinds.push('P');
+            if (PC.bits(masks[i]) === 1) leaves.push(i);
+          }
+          src = ri(cells);
+          kinds[src] = 'S';
+          for (const i of leaves) if (i !== src && fl.length < 3 && rnd() < 0.6) {
+            kinds[i] = 'F';
+            fl.push(i);
+          }
+          for (let k = ri(3); k > 0; k--) {
+            const i = ri(cells);
+            if (kinds[i] === 'P') masks[i] = PC.rot(masks[i]);
+          }
+        } else {
+          for (let i = 0; i < cells; i++) {
+            const r = rnd();
+            kinds.push(r < 0.15 ? '.' : 'P');
+            masks.push(r < 0.15 ? 0 : 1 + ri(15));
+          }
+          src = ri(cells);
+          kinds[src] = 'S';
+          for (let k = 0; k < 1 + ri(3); k++) {
+            const f = ri(cells);
+            if (f !== src && kinds[f] !== 'F') {
+              kinds[f] = 'F';
+              masks[f] = [1, 2, 4, 8][ri(4)];
+              fl.push(f);
+            }
           }
         }
         if (!fl.length) continue;

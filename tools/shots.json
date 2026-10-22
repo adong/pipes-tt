@@ -1,0 +1,4 @@
+[
+ { "label": "prefs", "js": "localStorage.setItem('claudeGames.muted', '1'); localStorage.removeItem('claudeGames.lang'); localStorage.removeItem('pipeConnectTT.v1'); location.reload(); 'reload'", "wait": 4500 },
+ { "label": "title", "js": "game.hold(true); for (let k = 0; k < 80 && !game.G.demo.board.won; k++) game.step(0.25); game.step(2.1); 'demo won ' + game.G.demo.board.won + ', flowers open ' + game.G.demo.board.view.bloomed()", "wait": 900, "shot": "screenshot" }
+]

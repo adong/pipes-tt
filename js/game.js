@@ -21,8 +21,8 @@
     people: 0.8, // the boys' size next to a garden of 1 m tiles
     race: { toWin: 2, pool: { easy: ['e5', 'e6', 'e7', 'e8', 'e9', 'e10', 'e11', 'e12'], normal: ['n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8'] } },
     cpu: {
-      easy: { id: 'froggy', name: 'FROGGY', emoji: '🐸', tag: '#3fbf4e', think: [1.8, 2.8], slip: 0.25 },
-      normal: { id: 'foxy', name: 'FOXY', emoji: '🦊', tag: '#ff8a1f', think: [1.1, 1.7], slip: 0.15 },
+      easy: { id: 'froggy', name: 'FROGGY', emoji: '🐸', tag: '#3fbf4e', think: [2.4, 3.4], slip: 0.3 },
+      normal: { id: 'foxy', name: 'FOXY', emoji: '🦊', tag: '#ff8a1f', think: [1.5, 2.2], slip: 0.2 },
     },
     demoLevel: 'e12',
   };
@@ -167,6 +167,7 @@
     for (const id of ['teddy', 'tommy']) if (people[id].visible) add(homes[id]);
     if (G.mode === 'race' && G.players === 1 && !G.demo) add(spots.friend);
     if (G.mode === 'puzzle' && G.players === 1 && !G.demo) add(spots.buddy);
+    if (G.players === 2 && !G.demo && G.boards.length) for (const p of buddyApi.meet()) add(p); // where they high-five
     const wide = ST.W / ST.H >= 1.05;
     let m;
     if (G.state === 'home' || G.demo) {

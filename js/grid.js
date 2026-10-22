@@ -272,7 +272,7 @@
       point.visible = V.hinted !== null;
       if (V.hinted !== null) {
         gold.position.set(cx(i), TOP + 0.05, cz(i));
-        point.position.set(cx(i), TOP + 1.25, cz(i));
+        point.position.set(cx(i), TOP + 0.95, cz(i));
       }
     };
 
@@ -389,7 +389,7 @@
       }
       for (const c of cursors) if (c.visible) c.position.y = TOP + 0.03 + Math.abs(Math.sin(V.clock * 4)) * 0.03;
       if (point.visible) {
-        point.position.y = TOP + 1.2 + Math.abs(Math.sin(V.clock * 5)) * 0.25;
+        point.position.y = TOP + 0.9 + Math.abs(Math.sin(V.clock * 5)) * 0.22;
         gold.children[0].material.opacity = 0.65 + Math.sin(V.clock * 8) * 0.35;
       }
     };
