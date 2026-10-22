@@ -1,0 +1,48 @@
+/* TT Pipe Connect: the 40 levels (20 🐣 EASY, 20 🔥 NORMAL). Made by tools/make-levels.js: don't edit by hand.
+   Each row is two characters a tile: the kind (. grass, R rock, S tap, F flower, P pipe, X bolted pipe), then the
+   openings in hex (N 1, E 2, S 4, W 8). par: the clockwise turns the level was made to need. */
+(function () {
+  const PC = (globalThis.PC = globalThis.PC || {});
+  PC.LEVELS = [
+    { id: 'e1', tier: 'easy', par: 1, rows: [".0.0S4", "F2P5P9", ".0.0.0"] },
+    { id: 'e2', tier: 'easy', par: 3, rows: [".0PcF8", ".0P3S8", "R0.0R0"] },
+    { id: 'e3', tier: 'easy', par: 2, rows: ["P6P5S8", "Pa.0.0", "F1R0.0"] },
+    { id: 'e4', tier: 'easy', par: 3, rows: ["P6P5S8", "PcF8.0", ".0.0.0", ".0.0.0"] },
+    { id: 'e5', tier: 'easy', par: 4, rows: [".0F4S2P3", ".0X5X6P9", ".0P3P6.0"] },
+    { id: 'e6', tier: 'easy', par: 5, rows: ["P6S8.0.0", "P9Pc.0.0", ".0P3P5P9", ".0.0.0F1"] },
+    { id: 'e7', tier: 'easy', par: 4, rows: ["P6PeP5F8", "F1Pa.0.0", "S2P6.0.0", ".0.0.0.0"] },
+    { id: 'e8', tier: 'easy', par: 7, rows: [".0.0PcS8", "R0.0P3P3", ".0.0F4P5", ".0.0P3P6"] },
+    { id: 'e9', tier: 'easy', par: 7, rows: [".0.0PcPc", ".0.0PaS1", ".0.0Pa.0", ".0.0PcXc", ".0.0.0F1"] },
+    { id: 'e10', tier: 'easy', par: 6, rows: ["F2Xc.0R0.0", "P6P3.0R0.0", "PaF2Pc.0.0", "X3P5PdS8.0"] },
+    { id: 'e11', tier: 'easy', par: 8, rows: ["P5.0.0R0", "R0P5.0.0", "F4P6P5F8", "PaP5P6P9", "P6PbP9S1"] },
+    { id: 'e12', tier: 'easy', par: 6, rows: ["P6P6P6P9.0", "F1P9P9X5.0", "S4P3R0P5R0", "P9PaPaX9.0", "Pa.0.0R0R0"] },
+    { id: 'e13', tier: 'easy', par: 8, rows: ["F4.0R0.0.0", "P3Xc.0F4.0", "S4Pa.0P5R0", "PaP5.0PcPc", "P3P7XaP5P9"] },
+    { id: 'e14', tier: 'easy', par: 11, rows: [".0R0F2PeF8", "S4P3P5P3P5", "P6P3.0.0P6", "Pa.0Pa.0.0", "P3R0R0.0.0"] },
+    { id: 'e15', tier: 'easy', par: 9, rows: ["P6F8.0Pc.0", "P3P6.0R0.0", "S4PeF8.0Pc", "P5P3P9.0.0", "P9P5P9.0P9"] },
+    { id: 'e16', tier: 'easy', par: 11, rows: ["P7R0.0PeF4", "R0.0.0P9P6", ".0PaPaP3P9", ".0.0R0P6Pc", "S2P5PaPeF8"] },
+    { id: 'e17', tier: 'easy', par: 10, rows: ["F2P5P3PbP7", "PcPcPcPcP5", ".0P7Pc.0.0", ".0PaF1.0.0", "R0P9P6.0.0", "P9.0S1.0.0"] },
+    { id: 'e18', tier: 'easy', par: 10, rows: ["P6P5P7F8P3S8", "P3F8P5P3P3F4", ".0.0P3PbP5P6", "P9.0.0R0.0.0", ".0R0R0.0.0Pc"] },
+    { id: 'e19', tier: 'easy', par: 13, rows: ["P6S8R0.0P6", "P5R0.0R0.0", "P9P9F4.0R0", "F4PbP6Pb.0", "PbP9PcF8.0", "PcPaP9.0.0"] },
+    { id: 'e20', tier: 'easy', par: 14, rows: [".0P5R0.0P6F8", "S4P7P6.0P9Pc", "PaR0P9.0P3P9", "PdP9P6P5P9F4", "P5P3P3P6PaPd", "P3PaPaP6.0F1"] },
+    { id: 'n1', tier: 'normal', par: 10, rows: ["S2P9P9P3R0", "F4P5Pd.0P6", "PdP6Pa.0P5", "P5P5.0P3Pe", "P9P5P5PaF8"] },
+    { id: 'n2', tier: 'normal', par: 12, rows: ["P9PaPcR0.0", "Pa.0P5P6P5", "PaF2P6P9P3", "PcP6PbR0P5", "S2P7F8PcPa"] },
+    { id: 'n3', tier: 'normal', par: 15, rows: ["PcPb.0R0P9", ".0P9P5PbP9", "F4P5.0Pe.0", "PcPaP5P6Pa", "S4P3PbPcP6", "PcP3PcPaF8"] },
+    { id: 'n4', tier: 'normal', par: 14, rows: ["P6P5P3S2P7P6", "P5P9PbP5PcP5", "P5PcF8.0P5P5", "PaP9PcP6PcPa", "P9F8.0P6F2P9"] },
+    { id: 'n5', tier: 'normal', par: 19, rows: ["PeP3PaP5PcP6", "P9Pb.0PePcF8", "P5P3PcF4PeR0", "PaP5P3P3P5R0", "P3P5P5P6PePd", "PaP9PaP6PaS8"] },
+    { id: 'n6', tier: 'normal', par: 19, rows: ["PcF8PcP6F4S4", "P6P5P6P3XfP6", ".0.0PdP9PaF4", ".0PePe.0PcPc", "R0P3P9PcP6.0", "PbPbP9.0PcPb"] },
+    { id: 'n7', tier: 'normal', par: 16, rows: ["F2P5PaPbP5P9", "P9P7P3P9F4S1", "PcP3P9PbP3Pa", "R0PaP7P5P9Pa", "P6P5R0PaR0P6", "PcPaPaP9PaF8"] },
+    { id: 'n8', tier: 'normal', par: 19, rows: ["PcP3P5P6S2P9", "P9P9F4PcP3Pa", "PbP5PbF8P6Pc", "F1PeP6PaP9Pa", "R0P6PaPeP6P6", "PcR0P6P3P5P9"] },
+    { id: 'n9', tier: 'normal', par: 20, rows: ["P3P9PaP9PaR0", "F1PaF4PaP7Pc", "P6P6P5P6R0P9", "P6PcP9P6PcS4", "P6P9F4PcP9Pa", "P9PaPbP5PbP9", "P6P7PcP5PcP5"] },
+    { id: 'n10', tier: 'normal', par: 19, rows: ["P3P5P3P5P6P5F4", "P5P5PdPaP5PaPe", "PaP6P5P3R0P5Pa", "F1PcP5PaP6.0P5", "PePcP6P9PaPaPa", "P5P6S8P5P5PdF1"] },
+    { id: 'n11', tier: 'normal', par: 26, rows: ["P3P5PdPdPcF4", "P3F8PaPaPaP5", "PcP5P3P5P3Pb", "F1P6P3P6PaP5", "P5P3PaR0P9P5", "PdPaF1P5PcPa", "P3P3PbR0P5S1"] },
+    { id: 'n12', tier: 'normal', par: 25, rows: ["P3P9R0PcP3R0Pa", "S1PaF4P5PePc.0", "P3P3P7PaP5P3P9", "P6PbPcPa.0F1Pa", "F4P5F2P3PbP5P3", "P9PbP5P3PaP9P6"] },
+    { id: 'n13', tier: 'normal', par: 27, rows: ["P9F8PcP3PcP7P5", "PaP9P3.0P5PaPa", "P3P9P3P7PaPePc", "P6P5PcPcP9P5F1", "PaP5P5F2P9P9P3", "P9PaP3P6P3PaP3", "P9PaS8PcP3.0Pa"] },
+    { id: 'n14', tier: 'normal', par: 28, rows: ["F4PcP5P7P5P5Pc", "P5PaPcPcPaP6P6", "PaPaP3P6PcP9Pc", "P7P9P6PcP5R0Pa", "P5P3P3PaP3F2P6", "P5F1R0P5P9P5Pd", "PcS8PcP3PcP5Pd"] },
+    { id: 'n15', tier: 'normal', par: 28, rows: ["F4PaP3P3.0P6P5", "Pa.0PcR0P3P9P6", "P9PaPaP5PaP7P3", "P3P6P5P5PaP3F1", "P3P5F2PaP3P6P9", "P6PdP6F4P3PcP5", "P6S8P9P7PaP5Pc"] },
+    { id: 'n16', tier: 'normal', par: 30, rows: ["PcP5S8R0P5P9P5", "PaF2P5P6P9P3R0", "PdP6P9PcPdP9P3", "PaPaPcPcP3P5P6", "F1PbF8PaP6P6Pa", "P3P7P5P3P5PaP9", "P9PaPaP5P5F8P5"] },
+    { id: 'n17', tier: 'normal', par: 27, rows: ["P6P9P6PdS2PaP6", "R0P3P9PaP5P3P5", "P6PcP5F4P3P7P7", "P7R0P9P9P9P3Pa", "PcPePaPaPaP9P5", "PaP3F8PaP7P9P6", "P3P5PaF8R0P9F8"] },
+    { id: 'n18', tier: 'normal', par: 35, rows: ["P6PcP7P3P6P6F8", "PaP3P6P9P6PbP9", "PcP3P5P5PaP5Pa", "P6F2P9PaF4P5Pa", "P6PcPaP9P6PbPa", "P9P9P3P5P6F1Pa", "P6P5P9S2PeP5P6"] },
+    { id: 'n19', tier: 'normal', par: 29, rows: ["P9PcPbP3P7P5P3", "P3PaF8PaPcPeP6", "P7PcPaP3P9P3Pa", "F1PaPcP3P6PdP7", "S4PcP3P5P3F2P9", "P9PcPcPdF4P5P5", "F2PdP3P9PdP5P3"] },
+    { id: 'n20', tier: 'normal', par: 31, rows: ["P6P5P9P9P3PeP9", "F1PdP9PbPaP6P9", "P9P5PcP5P3PcP7", "P3PdP5P9P6P5F8", "PaPaF2PeP6PcP9", "P5P3PcF1P7P5P3", "P9S8PcP5P6F2P9"] },
+  ];
+})();
